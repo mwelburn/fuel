@@ -17,6 +17,8 @@ module Fuel
     def feed
       # TODO - allow configurable amount
       @posts = Fuel::Post.recent_published_posts.first(10)
+      @title = Fuel.configuration.blog_title
+      @description = Fuel.configuration.blog_description
       respond_to do |format|
         format.rss { render :layout => false }
       end
