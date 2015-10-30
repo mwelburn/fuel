@@ -14,6 +14,14 @@ module Fuel
       @description = Fuel.configuration.blog_description
     end
 
+    def feed
+      # TODO - allow configurable amount
+      @posts = Fuel::Post.recent_published_posts.first(10)
+      respond_to do |format|
+        format.rss { render :layout => false }
+      end
+    end
+
     def show
       @post = Fuel::Post.find_by_slug(params[:id]) || Fuel::Post.find_by_id(params[:id]) || not_found
       @title = truncate_on_space(@post.seo_title || @post.title, 70)

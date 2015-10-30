@@ -9,6 +9,7 @@
     <%= stylesheet_link_tag "fuel/application", media: "all" %>
     <script src="//use.typekit.net/nti1hfq.js"></script>
     <script async>try{Typekit.load();}catch(e){}</script>
+    <%= link_to "RSS Feed", posts_url(:feed) %>
   </head>
   <body class="<%= controller_name %>-controller <%= action_name %>-action">
     <%= render partial: 'fuel/components/navbar' %>
