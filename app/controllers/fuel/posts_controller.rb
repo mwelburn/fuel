@@ -12,6 +12,11 @@ module Fuel
       @posts = Fuel::Post.recent_published_posts.page(params[:page])
       @title = Fuel.configuration.blog_title
       @description = Fuel.configuration.blog_description
+
+      respond_to do |format|
+        format.html
+        format.json { render json: @posts, :methods => [:avatar_url, :featured_image_url] }
+      end
     end
 
     def feed
@@ -29,6 +34,11 @@ module Fuel
       @title = truncate_on_space(@post.seo_title || @post.title, 70)
       @description = @post.seo_description
       @disqus_name = Fuel.configuration.disqus_name
+
+      respond_to do |format|
+        format.html
+        format.json { render json: @post, :methods => [:avatar_url, :featured_image_url] }
+      end
     end
 
     def preview
